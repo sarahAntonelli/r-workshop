@@ -56,6 +56,33 @@ carpCover2000 <- read_excel(here("R-workshop-data","substrate_cover_curated.xlsx
 
 ### How can we read in data from an Excel workbook with MULTIPLE worksheets?
 
+```{r read in only one kelp worksheet}
+kelpGolb <- read_excel(here("R-workshop-data","kelp_counts_curated.xlsx"),
+                       sheet = "golb")
+```
+
+### Read in AND combine data from multiple Excel worksheets simultaneously using purrr::map_df()
+
+```{r combine data from multiple worksheets}
+# Create a path to get to the data
+kelpPath <- here("R-workshop-data","kelp_counts_curated.xlsx")
+
+# kelpAllSites <- kelpPath %>%
+#   excel_sheets() %>% 
+#   set_names() %>% 
+#   map_df(read_excel, kelpPath)
+```
+
+### Write a file back to an Excel spreadsheet
+
+We're going to write our "kelpGolb" object to a CSV file
+
+```{r write csv}
+write_csv(kelpGolb, "kelpGoletaJuly.csv")
+
+write_xlsx(kelpGolb, "kelpGoletaJuly.xlsx")
+```
+
 
 
 
