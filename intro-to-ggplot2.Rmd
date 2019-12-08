@@ -86,3 +86,96 @@ ggplot(data = ciNp, aes(x = year, y = visitors)) +
             size = 4,
             alpha = 0.8)
 ```
+
+## Customize elements based on variable values or outcomes
+
+```{r}
+ggplot(data = ciNp, aes(x = year, y = visitors)) +
+  geom_point(pch = 17,
+            aes(size = visitors,
+                color = visitors),
+            alpha = 0.8)
+```
+
+Activity: Create a column plot of CINP visitation over time, where the FILL COLOR changes based on the number of visitors, and the outline color (color = ) is "magenta".
+
+```{r}
+ggplot(data = ciNp, aes(x = year, y = visitors)) +
+  geom_col(aes(fill = visitors),
+           color = "magenta")
+```
+
+```{r}
+ggplot(data = ciNp, aes(x = year, y = visitors)) +
+  geom_point(pch = 21,
+             color = "magenta",
+             bg = "royalblue4")
+```
+
+```{r}
+ggplot(data = ciNp, aes(x = year, y = visitors)) +
+  geom_line(size = 3,
+            color = "red") +
+  theme_minimal()
+```
+
+## Add/update labels & titles
+
+Using `labs` 
+
+```{r}
+ggplot(data = ciNp, aes(x = year, y = visitors)) +
+  geom_point(size = 6,
+             color = "navy")+
+  theme_minimal() +
+  labs(x = "My x-axis title",
+       y = "Annual visitors",
+       title = "Channel Islands NP Visitation",
+       subtitle = "(1963 - 2016)")
+```
+
+## Combine compatible geoms
+
+Example: Add a point plot on top of a line plot:
+
+```{r}
+ggplot(data = ciNp, aes(x = year, y = visitors)) +
+  geom_line(color = "purple") +
+  geom_point(color = "magenta",
+             aes(size = year))
+```
+
+Create a combined column graph + line graph of visitation:
+
+```{r}
+ggplot(data = ciNp, aes(x = year, y = visitors)) +
+  geom_col(aes(color = visitors,
+               fill = year)) +
+  geom_line(color = "limegreen")
+```
+
+## Create a line graph with multiple series
+
+```{r}
+ggplot(data = caNp, aes(x = year, y = visitors, color = park_name)) +
+  geom_line()
+```
+
+## Faceting ggplot graphs
+
+- Each series (group) gets its own plot panel
+
+```{r}
+ggplot(data = caNp, aes(x = year, y = visitors, color = park_name)) +
+  geom_line(show.legend = FALSE) +
+  theme_minimal() +
+  facet_wrap(~ park_name)
+```
+
+## Use ggsave to export a plot
+
+```{r}
+ggsave("npGraph.png", dpi = 180, width = 8, height = 7)
+```
+
+## Sync back to GitHub remote
