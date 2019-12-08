@@ -126,3 +126,55 @@ ggplot(data = siteYearSummary, aes(x = year, y = medianSizeMm, color = site)) +
 ggsave(here("figures/lobsterMedianYear.png"), dpi = 180, width = 8, height = 7)
 
 ```
+
+## dplyr::count() for counting by group
+This is a "shortcut" function
+
+```{r}
+
+lobsters %>% 
+  count(site, year)
+
+## this is the same as
+
+lobsters %>% 
+  group_by(site, year) %>% 
+  summarize(n = n()) %>% 
+  ungroup()
+
+```
+
+# mutate() adds a new column
+it will make a new variable
+
+- Add a new column that is the size in meters
+- Add a new column that is a repeated value
+```{r}
+
+head(lobsters)
+
+lobsters %>% 
+  mutate(sizeM = size_mm / 1000,
+         millenia = 2000,
+         observer = "Allison Horst")
+
+```
+
+## select() function to subset variables by columns
+
+let's select
+- date
+- site
+- sizeM
+
+```{r}
+
+lobstersSelected <- lobsters %>% 
+  mutate(sizeM = size_mm / 1000) %>% 
+  select(date, site, sizeM)
+
+```
+
+
+
+
