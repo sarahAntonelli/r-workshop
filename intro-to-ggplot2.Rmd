@@ -1,0 +1,88 @@
+---
+title: "Intro to ggplot2"
+author: "Sarah Antonelli"
+date: "12/8/2019"
+output: html_document
+---
+
+## Attach packages
+
+```{r packages}
+library(tidyverse)
+library(readxl)
+library(here)
+```
+
+## Read in the data
+
+```{r name data objects}
+caNp <- read_csv(here("R-workshop-data", "ca_np.csv"))
+ciNp <- read_excel(here("R-workshop-data", "ci_np.xlsx"))
+```
+
+## Make a graph
+
+1. Tell R we're using `ggplot`
+2. Tell R what data we're using and what variable we want to plot
+3. Tell R what type of graph we're creating (ie geom)
+
+```{r graph structure, eval = FALSE}
+ggplot(data = THIS, aes(x = THIS, y = THIS)) +
+  geom_THIS()
+```
+
+Now let's create a graph of CI visitation:
+```{r create CI NP line graph}
+ggplot(data = ciNp, aes(x = year, y = visitors)) +
+  geom_line()
+```
+
+```{r create CI NP scatterplot}
+ggplot(data = ciNp, aes(x = year, y = visitors)) +
+  geom_point()
+```
+
+1. Create a column graph with these data
+2. Create an area graph with these data
+```{r column graph}
+ggplot(data = ciNp, aes(x = year, y = visitors)) +
+  geom_col()
+```
+
+```{r area graph}
+ggplot(data = ciNp, aes(x = year, y = visitors)) +
+  geom_area()
+```
+
+## Intro to customizing `ggplot` graphs
+
+- color = update point or line color
+- fill = update the fill characteristic of an element
+- linetype = 
+- pch = value from 1 to 30 for point type
+- size = change size of elements
+- alpha = change transparency of an element
+
+```{r customize plot with ggplot}
+ggplot(data = ciNp, aes(x = year, y = visitors)) +
+  geom_line(color = "limegreen",
+            linetype = "dashed")
+```
+
+```{r customize plot with ggplot 2}
+ggplot(data = ciNp, aes(x = year, y = visitors)) +
+  geom_point(color = "blue",
+            pch = 17,
+            size = 4,
+            alpha = 0.5)
+```
+
+I have some awesome text here, and below is my amazing finalized graph:
+
+```{r, echo = FALSE}
+ggplot(data = ciNp, aes(x = year, y = visitors)) +
+  geom_point(color = "royalblue4",
+            pch = 21,
+            size = 4,
+            alpha = 0.8)
+```
