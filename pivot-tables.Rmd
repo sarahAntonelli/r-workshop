@@ -22,7 +22,7 @@ Our data is about lobsters
 
 ```{r}
 
-lobsters <- read_excel(here("R-workshop-data", "lobsters.xlsx"))
+lobsters <- read_excel(here("R-workshop-data", "lobsters2.xlsx"))
 
 ```
 
@@ -117,8 +117,12 @@ ggplot(data = siteYearSummary, aes(x = year, y = medianSizeMm, fill = site)) +
   facet_wrap(~site) +
   theme_minimal()
 
+ggsave(here("figures/lobsterMedianYearFaceted.png"), dpi = 180, width = 8, height = 7)
+
+ggplot(data = siteYearSummary, aes(x = year, y = medianSizeMm, color = site)) +
+  geom_line() +
+  theme_minimal()
+
 ggsave(here("figures/lobsterMedianYear.png"), dpi = 180, width = 8, height = 7)
-
-
 
 ```
